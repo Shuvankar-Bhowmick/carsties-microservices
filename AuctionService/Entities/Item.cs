@@ -1,5 +1,9 @@
-﻿namespace AuctionService.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
+namespace AuctionService.Entities;
+
+
+[Table("Items")]
 public class Item
 {
     public Guid Id { get; set; }
@@ -11,6 +15,6 @@ public class Item
     public string ImageUrl { get; set; }
 
     // nav properties for EF Core
-    public Auction Auction { get; set; }
-    public Guid AuctionId { get; set; }
+    public Auction Auction { get; set; } // navigation property
+    public Guid AuctionId { get; set; }  // foreign key property (optional when navigation property is already present)
 }
