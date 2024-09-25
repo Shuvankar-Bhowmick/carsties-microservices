@@ -24,7 +24,7 @@ public class DbInitializer
 
         var auctions = new List<Auction>()
         {
-            // add auctions
+            
         };
 
         context.AddRange(auctions);
