@@ -13,5 +13,11 @@ public class Auction
     public DateTime AuctionEnd { get; set; }
     public Status Status { get; set; }
     
-    public Item Item { get; set; }
+    public Item Item { get; set; }  // navigation property
 }
+
+/*
+    Navigation properties are used to create mappings/relationships between two tables by EF Core. These properties have to be 
+    mentioned in both the classes so that EF Core can create the relationship properly. EF Core takes care of these mappings by 
+    itself.   
+*/
