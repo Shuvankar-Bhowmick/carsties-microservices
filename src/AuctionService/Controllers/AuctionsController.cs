@@ -1,6 +1,8 @@
 using AuctionService.Data;
 using AuctionService.DTOs;
+using AuctionService.Entities;
 using AutoMapper;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,7 +20,7 @@ public class AuctionsController(
     [HttpGet]
     public async Task<ActionResult<List<AuctionResponseDto>>> GetAllAuctions()
     {
-        var auctions = _context.Auctions
+        var auctions = await _context.Auctions
             .Include(x => x.Item)
             .OrderBy(x => x.Item.Make)
             .ToListAsync();
@@ -37,5 +39,22 @@ public class AuctionsController(
             return NotFound();
         
         return _mapper.Map<AuctionResponseDto>(auction);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<AuctionResponseDto>> CreateAuction(
+        [FromBody] CreateAuctionRequestDto createAuctionRequestDto,
+        CancellationToken cancellationToken)
+    {
+        var auction = _mapper.Map<Auction>(createAuctionRequestDto);
+        
+        await _context.Auctions.AddAsync(auction, cancellationToken);
+        var response = await _context.SaveChangesAsync(cancellationToken);
+        
+        // ReSharper disable once ConvertIfStatementToReturnStatement
+        if (response == null)
+            return NotFound();
+
+        return _mapper.Map<ActionResult<AuctionResponseDto>>(response);
     }
 }
