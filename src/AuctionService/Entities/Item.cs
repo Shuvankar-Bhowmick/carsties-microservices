@@ -15,7 +15,6 @@ public class Item
     public string ImageUrl { get; set; }
 
     
-    // example comment
     // nav properties for EF Core
     public Auction Auction { get; set; } // navigation property
     public Guid AuctionId { get; set; }  // foreign key property (optional when navigation property is already present)
