@@ -11,7 +11,7 @@ on:
 
 env:
   Configuration: Release
-  Project: "**/*.csproj"
+  Project: "src/AuctionService/AuctionService.csproj"
 
 jobs:
   build:
@@ -31,7 +31,10 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish
-      run: dotnet publish "$Project" --no-restore --no-build --configuration $Configuration --output ${{ github.workspace }}/publish
+      run: |
+          for project in src/**/*.csproj; do
+            dotnet publish "$project" -c  $Configuration -o ${{ github.workspace }}/publish
+          done
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
