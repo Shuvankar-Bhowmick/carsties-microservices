@@ -35,7 +35,7 @@ public class AuctionsController(
     {
         var auction = await _context.Auctions
             .Include(x => x.Item)
-            .FirstOrDefaultAsync(x => x.Id == id);
+            .FirstOrDefaultAsync(x => x.Id == id, cancellationToken: cancellationToken);
 
         if (auction == null)
             return NotFound();
