@@ -11,6 +11,7 @@ on:
 
 env:
   Configuration: Release
+  Project: "**/*.csproj"
 
 jobs:
   build:
@@ -30,10 +31,10 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish
-      run: dotnet publish --no-restore --no-build --configuration $Configuration -o ./output/publish
+      run: dotnet publish --no-restore --no-build --configuration $Configuration --output ${{ github.workspace }}/publish
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: carsties-artifact
-        path: ./output/publish
+        name: carsties-microservices
+        path:  ${{ github.workspace }}/publish
         overwrite: true
