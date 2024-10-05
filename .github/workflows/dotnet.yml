@@ -11,7 +11,6 @@ on:
 
 env:
   Configuration: Release
-  Project: "src/AuctionService/AuctionService.csproj"
 
 jobs:
   build:
