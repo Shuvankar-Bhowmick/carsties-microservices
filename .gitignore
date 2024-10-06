@@ -82,3 +82,7 @@ fabric.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/rider
 /.idea/
+
+# .NET binaries
+src/AuctionService/bin
+src/AuctionService/obj
