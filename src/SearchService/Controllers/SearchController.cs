@@ -12,6 +12,7 @@ public class SearchController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<Item>> SearchItems(string searchTerm)
     {
-        
+        /* TODO: Write code for SearchItems action method */
+        return await Task.FromResult<ActionResult<Item>>(Ok(new Item()));
     }
 }
